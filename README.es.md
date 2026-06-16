@@ -1,5 +1,3 @@
-**[English](README.md) | [Español](README.es.md)**
-
 # Valoración de Acciones de Grupo Melo
 
 Una herramienta de valoración en Python para Grupo Melo (Bolsa de Valores de Panamá), que combina análisis de razones financieras con un modelo de flujo de caja descontado (DCF) para estimar el valor intrínseco de la acción.
@@ -23,9 +21,9 @@ Esta es una prima considerable (2.7x), y debe interpretarse como una señal para
 1. **`load_data.py`** — Procesa el archivo CSV con los estados financieros brutos (balance general, estado de resultados, flujo de efectivo), que vienen apilados en un solo archivo, y los separa en tres DataFrames limpios.
 2. **`valuation.py`** — Carga los estados procesados, calcula las razones financieras (ROE, ROA, Margen Neto, Deuda/Patrimonio, UPA, P/E, P/B), ejecuta el modelo DCF, genera la tabla de sensibilidad, y exporta los tres resultados como CSV para Power BI.
 
-```
+
 Grupo_Melo_CFS.csv → load_data.py → valuation.py → exports/*.csv → Dashboard de Power BI
-```
+
 
 ## Razones Calculadas
 
@@ -59,13 +57,12 @@ Grupo_Melo_CFS.csv → load_data.py → valuation.py → exports/*.csv → Dashb
 
 ## Cómo Ejecutar el Proyecto
 
-```bash
-pip install pandas
-python valuation.py
-```
+- pip install pandas
+- python valuation.py
+
 
 Genera tres archivos CSV en `exports/`: `ratios.csv`, `dcf.csv`, `sensitivity.csv`. Importa estos archivos en Power BI para reproducir el dashboard.
 
 ## Autor
 
-Antonio — Graduado en Banca y Finanzas, Ciudad de Panamá. Desarrollado como parte de un portafolio de análisis de datos enfocado en roles de analista financiero.
+Antonio J. Caballero de la Guardia

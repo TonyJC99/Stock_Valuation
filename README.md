@@ -1,31 +1,31 @@
 # Grupo Melo Stock Valuation
 
-A Python-based valuation tool for Grupo Melo (Bolsa de Valores de Panamá), combining ratio analysis with a discounted cash flow (DCF) model to estimate intrinsic share value.
+Python valuation tool for Grupo Melo (Bolsa de Valores de Panamá). Combines ratio analysis with a DCF model to estimate intrinsic share value.
 
-## Overview
+## What it does
 
-This project analyzes Grupo Melo's consolidated financial statements (2023–2025) to assess company performance and estimate fair value per share. It outputs:
+Analyzes Grupo Melo's consolidated financial statements (2023-2025) and outputs:
 
 - Profitability, leverage, and market ratios across three fiscal years
 - A 5-year DCF valuation with intrinsic value per share
-- A sensitivity table testing intrinsic value across a range of discount rate and terminal growth assumptions
+- A sensitivity table across discount rate and terminal growth assumptions
 
-## Key Finding
+## Result
 
-At a 10% discount rate and 3% terminal growth rate, the model estimates an intrinsic value of **$147.22/share**, against a market price of **$54.80/share** — implying the stock is undervalued by a wide margin. The sensitivity table confirms undervaluation holds across all tested combinations of discount rate (8–14%) and terminal growth (2–4%).
+At a 10% discount rate and 3% terminal growth, the model gives an intrinsic value of $147.22/share against a market price of $54.80/share. The sensitivity table holds the same direction across all tested combinations (8-14% discount rate, 2-4% terminal growth).
 
-This is a significant premium (2.7x), and should be read as a signal to scrutinize the underlying cash flow assumptions rather than as a definitive buy signal. See **Limitations** below.
+A 2.7x gap between intrinsic and market value is large enough that the cash flow assumptions deserve scrutiny before treating this as a real signal. See Limitations.
 
-## How It Works
+## How it works
 
-1. **`load_data.py`** — Parses the raw financial statements CSV (balance sheet, income statement, cash flow), which are stacked in a single file, and splits them into three clean DataFrames.
-2. **`valuation.py`** — Loads the parsed statements, calculates ratios (ROE, ROA, Net Margin, Debt/Equity, EPS, P/E, P/B), runs the DCF model, generates the sensitivity table, and exports all three as CSVs for Power BI.
+1. `load_data.py` parses the raw CSV (balance sheet, income statement, cash flow stacked in one file) and splits it into three DataFrames.
+2. `valuation.py` loads those statements, calculates ratios (ROE, ROA, Net Margin, Debt/Equity, EPS, P/E, P/B), runs the DCF, builds the sensitivity table, and exports everything as CSVs for Power BI.
 
 ```
 Grupo_Melo_CFS.csv → load_data.py → valuation.py → exports/*.csv → Power BI dashboard
 ```
 
-## Ratios Calculated
+## Ratios calculated
 
 | Ratio | Formula |
 |---|---|
@@ -37,33 +37,32 @@ Grupo_Melo_CFS.csv → load_data.py → valuation.py → exports/*.csv → Power
 | P/E | Price per Share / EPS |
 | P/B | Market Cap / Total Equity |
 
-## DCF Assumptions
+## DCF assumptions
 
-- Base year free cash flow: Operating Cash Flow + CapEx (2025)
+- Base year FCF: Operating Cash Flow + CapEx (2025)
 - Projection period: 5 years
 - Base case: 10% discount rate, 3% terminal growth
 - Terminal value via Gordon Growth Model
 
 ## Limitations
 
-- FCF growth is assumed at a constant terminal rate across all 5 projection years, rather than modeling a declining or stepped growth path — this is a simplification that can overstate intrinsic value.
-- The model uses a single year (2025) as the base for projections rather than a normalized average across multiple years.
+- FCF growth is held constant at the terminal rate across all 5 projection years instead of declining or stepping down — this can overstate intrinsic value.
+- Projections are based on a single year (2025) rather than a normalized multi-year average.
 - No adjustment for one-time items in cash flow or net income.
 
-## Tech Stack
+## Stack
 
-- **Python** (pandas) — data parsing and financial modeling
-- **Power BI** — dashboard visualization (ratio trends, DCF summary, sensitivity matrix)
+Python (pandas), Power BI
 
-## Running the Project
+## Running it
 
-```bash
+```
 pip install pandas
 python valuation.py
 ```
 
-Outputs three CSVs to `exports/`: `ratios.csv`, `dcf.csv`, `sensitivity.csv`. Import these into Power BI to reproduce the dashboard.
+Outputs three CSVs to `exports/`: `ratios.csv`, `dcf.csv`, `sensitivity.csv`. Import into Power BI to reproduce the dashboard.
 
 ## Author
 
-Antonio — Banking and Finance graduate, Panama City. Built as part of a data analytics portfolio targeting financial analyst roles.
+Antonio J. Caballero de la Guardia
